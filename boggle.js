@@ -7,7 +7,7 @@ const board = [
 
 const word = 'BINGO'
 
-function checkWord( board, word ) {
+const checkWord = (board,word) => {
   const bLength = board.length
   
   //create waitlist of all elements that match the first letter in word

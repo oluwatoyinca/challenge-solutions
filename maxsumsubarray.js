@@ -1,6 +1,6 @@
 var arr = [-2,2,5,-11,6,2,5,5]
 
-var maxsum = (arr) => {
+const maxsum = (arr) => {
     var curr = arr[0]
     var max = curr
 
