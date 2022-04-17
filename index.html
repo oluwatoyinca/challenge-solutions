@@ -11,6 +11,7 @@
         <script src="autocorrect.js"></script>
         <script src="maxsumsubarray.js"></script>
         <script src="rotatearrayimage.js"></script>
+        <script src="longestsubarraybysum.js"></script>
         
     </head>
     <body class="home1">
@@ -19,12 +20,14 @@
         <p id="autocorrect"></p>
         <p id="maxsumsub"></p>
         <p id="rotatearray"></p>
+        <p id="longestsub"></p>
         <script>
             document.getElementById('boggle').innerHTML = checkWord(board, word);
             document.getElementById('frequentdays').innerHTML = mostFrequentDays(2022);
             document.getElementById('autocorrect').innerHTML = autocorrect('The best youuuuu in life u are you free!')
             document.getElementById('maxsumsub').innerHTML = maxsum(arr)
             document.getElementById('rotatearray').innerHTML = rotatearray(arr1)
+            document.getElementById('longestsub').innerHTML = longestsub(arr2, sum2)
         </script>
     </body>
 </html>
