@@ -57,8 +57,7 @@ Assume we configure our rate limiter to allow 3 requests in the last 2 seconds.
 
 --8---9---10----- A ----- A ------ A ----- R ----- 11----- R -----12----- A 
 
-A web server is just one of many applications for rate limiters, so we're going to be building a reusable Rate Limiter library today.  I’ll start out by writing some boilerplate code in your preferred language, but feel free to change anything and everything about it -- this is mostly to give you a better idea of what I'm looking for:
-
+A web server is just one of many applications for rate limiters, so we're going to be building a reusable Rate Limiter library today.  
 */
 
 
@@ -68,9 +67,14 @@ class RateLimiter {
       this.secondsWindow = secondsWindow
       this.acceptedRequests = {}
     }
+
+    deleteExpiredRequests(leastSecond) {
+      Object.keys(this.acceptedRequests).map(ar => {
+        if (ar<=leastSecond) delete this.acceptedRequests[ar]
+      })
+    }
     
-    // true if request should be accepted
-    // false if request should be rejected
+    // return true if request should be accepted, false if request should be rejected
     rateLimit(currTime) {
       let totalAccepted = 0
       const leastSecond = currTime-this.secondsWindow
@@ -80,9 +84,7 @@ class RateLimiter {
       }
 
       //delete requests longer than 2 seconds ago as we no longer need to compare them
-      Object.keys(this.acceptedRequests).map(ar => {
-        if (ar<=leastSecond) delete this.acceptedRequests[ar]
-      })
+      this.deleteExpiredRequests(leastSecond)
 
       if(totalAccepted < this.maxRequests) {
         if(this.acceptedRequests.hasOwnProperty(currTime)) 
@@ -95,34 +97,37 @@ class RateLimiter {
     }
   }
   
-  console.log("Test 1")
+    console.log("Test 1")
   const r = new RateLimiter(3,2)
-  console.log(r.rateLimit("", 10) == true)
-  console.log(r.rateLimit("", 10) == true)
-  console.log(r.rateLimit("", 10) == true)
-  console.log(r.rateLimit("", 10) == false)
-  console.log(r.rateLimit("", 11) == false)
-  console.log(r.rateLimit("", 12) == true)
+  console.log(r.rateLimit(10) == true)
+  console.log(r.rateLimit(10) == true)
+  console.log(r.rateLimit(10) == true)
+  console.log(r.rateLimit(10) == false)
+  console.log(r.rateLimit(11) == false)
+  console.log(r.rateLimit(12) == true)
+  console.log(r.rateLimit(16) == true)
+  console.log(r.acceptedRequests)
   
   console.log("Test 2")
   const r2 = new RateLimiter(3,2)
-  console.log(r2.rateLimit("", 10) == true)
-  console.log(r2.rateLimit("", 10) == true)
-  console.log(r2.rateLimit("", 11) == true)
-  console.log(r2.rateLimit("", 11) == false)
-  console.log(r2.rateLimit("", 11) == false)
-  console.log(r2.rateLimit("", 12) == true)
+  console.log(r2.rateLimit(10) == true)
+  console.log(r2.rateLimit(10) == true)
+  console.log(r2.rateLimit(11) == true)
+  console.log(r2.rateLimit(11) == false)
+  console.log(r2.rateLimit(11) == false)
+  console.log(r2.rateLimit(12) == true)
+  console.log(r2.rateLimit(13) == true)
+  console.log(r2.acceptedRequests)
   
   console.log("Test 3")
   const r3 = new RateLimiter(4,3)
-  console.log(r3.rateLimit("", 10) == true)
-  console.log(r3.rateLimit("", 10) == true)
-  console.log(r3.rateLimit("", 11) == true)
-  console.log(r3.rateLimit("", 11) == true)
-  console.log(r3.rateLimit("", 11) == false)
-  console.log(r3.rateLimit("", 12) == false)
-  console.log(r3.rateLimit("", 13) == true)
-  console.log(r3.rateLimit("", 13) == true)
-  console.log(r3.rateLimit("", 13) == false)
-  
+  console.log(r3.rateLimit(10) == true)
+  console.log(r3.rateLimit(10) == true)
+  console.log(r3.rateLimit(11) == true)
+  console.log(r3.rateLimit(11) == true)
+  console.log(r3.rateLimit(11) == false)
+  console.log(r3.rateLimit(12) == false)
+  console.log(r3.rateLimit(13) == true)
+  console.log(r3.rateLimit(13) == true)
+  console.log(r3.rateLimit(13) == false)
   console.log(r3.acceptedRequests)
