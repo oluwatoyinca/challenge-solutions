@@ -64,3 +64,20 @@ class CompressionTree {
 
 const trees = new CompressionTree('abcddcaaca')
 console.log(trees.tree)
+/* returns {
+  char: "#",
+  count: 10,
+  leftNode: {
+    char: "a",
+    count: 4,
+    leftNode: null,
+    rightNode: null
+  },
+  rightNode: {
+    char: "#",
+    count: 6,
+    leftNode: { ... },
+    rightNode: { ... }
+  }
+}
+*/
