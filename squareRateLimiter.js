@@ -97,7 +97,7 @@ class RateLimiter {
     }
   }
   
-    console.log("Test 1")
+  console.log("Test 1")
   const r = new RateLimiter(3,2)
   console.log(r.rateLimit(10) == true)
   console.log(r.rateLimit(10) == true)
