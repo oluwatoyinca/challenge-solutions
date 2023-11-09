@@ -31,7 +31,30 @@ Test3 Output:
 0 255 0 255 0 255 0
 */
 
+//Better Solution
 class PrintGrid {
+  constructor(printTimes, intervalCount) {
+    this.printTimes = printTimes
+    this.intervalCount = intervalCount
+  }
+  
+  printOut() {
+    let result = ''
+    
+    for(let i = 0; i<this.printTimes; i++) {
+      if(Math.floor(i/this.intervalCount) % 2 == 0)
+        result += '0 '
+      else
+        result += '255 '
+    }
+    
+    for(let i = 0; i<this.printTimes; i++)
+      console.log(result)
+  }
+}
+
+//First solution
+/* class PrintGrid {
   constructor(printTimes, intervalCount) {
     this.printTimes = printTimes
     this.intervalCount = intervalCount
@@ -58,7 +81,7 @@ class PrintGrid {
     for(let i = 0; i<this.printTimes; i++)
       console.log(result)
   }
-}
+} */
 
 const pG = new PrintGrid(7,1)
 pG.printOut()
