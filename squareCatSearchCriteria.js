@@ -57,6 +57,11 @@ const names = ["a","b","c","d","e","f","g","h"];
 const heights = [31,24,67,12,45,21,31,12];
 const weights = [120,124,160,130,175,120,124,142];
 const gCats = new Cats(names, heights, weights)
+// a,b,d,e,f,g,h
 console.log(gCats.getCatNames('HEIGHT',60,'<'))
+// c,e,h
 console.log(gCats.getCatNames('WEIGHT',130,'>'))
+// "No Cat matches that criteria"
 console.log(gCats.getCatNames('HEIGHT',10,'<'))
+// a,f
+console.log(gCats.getCatNames('WEIGHT',120,'='))
