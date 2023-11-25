@@ -1,3 +1,17 @@
+/*
+You are given an information on Cat object such as name,height and weight. For eg following:
+
+String[] names = {"a","b","c","d","e","f","g","h"};
+Integer[] height = {31,24,67,12,45,21,31,12};
+Integer[] weight = {120,124,160,130,175,120,124,142};
+
+You have to write a method which takes the following input and return the list of Cat objects which satisfies the input criteria. For eg
+
+searchCriteria could be : HEIGHT or WEIGHT
+searchValue could be : Integer value of either HEIGHT or WEIGHT
+symbol could be : "<" , ">", or "="
+*/
+
 class Cat {
   constructor(name, height, weight) {
     this.name = name
