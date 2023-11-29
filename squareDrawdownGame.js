@@ -30,7 +30,8 @@ class DrawdownGame {
     this.moves = moves
     this.scores = [0,0]
   }
-  
+
+  // recursive solution:
   playGame() {
     // clear scores
     this.scores = [0,0]
@@ -53,6 +54,31 @@ class DrawdownGame {
     makeMove(this.board)
     return this.scores
   }
+
+  /* solution using queue:
+  
+  playGame() {
+    this.scores = [0,0]
+    const boardQueue = [this.board]
+    
+    while(boardQueue.length > 0){
+      let gameEnded = false
+      const curBoard = boardQueue.pop()
+      
+      for(let move of this.moves){
+        const eB = this.executeMove(curBoard, move)
+        if(this.isValidMove(eB)) {
+          boardQueue.push(eB)
+          gameEnded = false
+        }
+        else gameEnded = true
+        
+        if(gameEnded) this.findWinner(curBoard)
+      }
+    }
+    return this.scores
+  }
+  */
   
   executeMove(board, move) {
     let thisBoard = []
