@@ -21,7 +21,7 @@ Player 1 performs move 3 (which is the only move available). New board: [2, 0, 2
 Player 2 is now forced to perform move 3. New board: [2, 0, 0, 0]
 The game is now over and player 1 is the winner.
 
-
+Return the total number of times each player could possibly win if every possible move combinations are used.
 */
 class DrawdownGame {
   constructor(board, moves) {
@@ -81,4 +81,4 @@ class DrawdownGame {
 }
 
 const myn = new DrawdownGame([6, 4, 2, 4], [[-2, -2, 1, 0], [-4, -4, 0 ,0], [0, 0, -2, -2]])
-console.log(myn.playGame())
+console.log(myn.playGame(), `Player 1 can win ${myn.playGame()[1]} time(s) and Player 2 can win ${myn.playGame()[2]} time(s)`)
